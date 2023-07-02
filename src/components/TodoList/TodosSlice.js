@@ -1,0 +1,41 @@
+
+const initState =
+    [
+        {
+            id: 1,
+            name: 'Learn HTML',
+            completed: false,
+            priority: 'Medium',
+        },
+        {
+            id: 2,
+            name: 'Learn CSS',
+            completed: true,
+            priority: 'Low',
+        },
+        {
+            id: 3,
+            name: 'Learn ReactJs',
+            completed: false,
+            priority: 'High',
+        }
+
+    ];
+
+
+const todoListReducer = (state = initState, action) => {
+    switch (action.type) {
+        case 'todoList/addTodo':
+            return [...state, action.payload]
+        case 'todoList/updateTodo':
+            return state.map((todo) =>
+                todo.id === action.payload
+                    ? { ...todo, completed: !todo.completed }
+                    : todo
+            )
+        default:
+            return state;
+    }
+}
+
+export default todoListReducer;
